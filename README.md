@@ -17,7 +17,7 @@ The following are required to complete this project:
 
 ## Description
 
-The Chicago Transit Authority (CTA) has asked us to develop a dashboard displaying system status for its commuters. We have decided to use Kafka and ecosystem tools like REST Proxy and Kafka Connect to accomplish this task.
+The Chicago Transit Authority (CTA) has asked to develop a dashboard displaying system status for its commuters. We use Kafka and ecosystem tools like REST Proxy and Kafka Connect to accomplish this task.
 
 Our architecture will look like so:
 
@@ -26,7 +26,7 @@ Our architecture will look like so:
 ### Step 1: Create Kafka Producers
 The first step in our plan is to configure the train stations to emit some of the events that we need. The CTA has placed a sensor on each side of every train station that can be programmed to take an action whenever a train arrives at the station.
 
-To accomplish this, you must complete the following tasks:
+To accomplish this, we must complete the following tasks:
 
 1. Complete the code in `producers/models/producer.py`
 1. Define a `value` schema for the arrival event in `producers/models/schemas/arrival_value.json` with the following attributes
@@ -53,7 +53,7 @@ To accomplish this, you must complete the following tasks:
 ### Step 2: Configure Kafka REST Proxy Producer
 Our partners at the CTA have asked that we also send weather readings into Kafka from their weather hardware. Unfortunately, this hardware is old and we cannot use the Python Client Library due to hardware restrictions. Instead, we are going to use HTTP REST to send the data to Kafka from the hardware using Kafka's REST Proxy.
 
-To accomplish this, you must complete the following tasks:
+To accomplish this, we must complete the following tasks:
 
 1. Define a `value` schema for the weather event in `producers/models/schemas/weather_value.json` with the following attributes
 	* `temperature`
@@ -67,7 +67,7 @@ To accomplish this, you must complete the following tasks:
 ### Step 3: Configure Kafka Connect
 Finally, we need to extract station information from our PostgreSQL database into Kafka. We've decided to use the [Kafka JDBC Source Connector](https://docs.confluent.io/current/connect/kafka-connect-jdbc/source-connector/index.html).
 
-To accomplish this, you must complete the following tasks:
+To accomplish this, we must complete the following tasks:
 
 1. Complete the code and configuration in `producers/connectors.py`
 	* Please refer to the [Kafka Connect JDBC Source Connector Configuration Options](https://docs.confluent.io/current/connect/kafka-connect-jdbc/source-connector/source_config_options.html) for documentation on the options you must complete.
@@ -78,7 +78,7 @@ To accomplish this, you must complete the following tasks:
 ### Step 4: Configure the Faust Stream Processor
 We will leverage Faust Stream Processing to transform the raw Stations table that we ingested from Kafka Connect. The raw format from the database has more data than we need, and the line color information is not conveniently configured. To remediate this, we're going to ingest data from our Kafka Connect topic, and transform the data.
 
-To accomplish this, you must complete the following tasks:
+To accomplish this, we must complete the following tasks:
 
 1. Complete the code and configuration in `consumers/faust_stream.py
 
@@ -91,7 +91,7 @@ You must run this Faust processing application with the following command:
 ### Step 5: Configure the KSQL Table
 Next, we will use KSQL to aggregate turnstile data for each of our stations. Recall that when we produced turnstile data, we simply emitted an event, not a count. What would make this data more useful would be to summarize it by station so that downstream applications always have an up-to-date count
 
-To accomplish this, you must complete the following tasks:
+To accomplish this, we must complete the following tasks:
 
 1. Complete the queries in `consumers/ksql.py`
 
@@ -105,7 +105,7 @@ To accomplish this, you must complete the following tasks:
 ### Step 6: Create Kafka Consumers
 With all of the data in Kafka, our final task is to consume the data in the web server that is going to serve the transit status pages to our commuters.
 
-To accomplish this, you must complete the following tasks:
+To accomplish this, we must complete the following tasks:
 
 1. Complete the code in `consumers/consumer.py`
 1. Complete the code in `consumers/models/line.py`
